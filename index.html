@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GORKA AI – Generate Stunning AI Photos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="GORKA AI is a next-gen AI photo generation platform with a bold black and orange design. Create stunning visuals instantly." />
+
+  <style>
+    :root {
+      --bg-black: #0b0b0b;
+      --bg-dark: #121212;
+      --orange: #ff7a00;
+      --orange-glow: rgba(255, 122, 0, 0.5);
+      --text-light: #f5f5f5;
+      --text-muted: #b5b5b5;
+      --card-bg: #1a1a1a;
+      --border-dark: #262626;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at top, #1a0d00, var(--bg-black));
+      color: var(--text-light);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background: linear-gradient(180deg, #0f0f0f, #0b0b0b);
+      border-bottom: 1px solid var(--border-dark);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--orange);
+      text-shadow: 0 0 15px var(--orange-glow);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      margin-left: 24px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--orange);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 100px 20px 80px;
+      text-align: center;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+      text-shadow: 0 0 20px var(--orange-glow);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 34px;
+      font-size: 16px;
+      border-radius: 40px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff7a00, #ff9a3c);
+      color: #000;
+      box-shadow: 0 0 25px var(--orange-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px var(--orange-glow);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+    }
+
+    .btn-outline:hover {
+      background: var(--orange);
+      color: #000;
+    }
+
+    /* ===== GENERATOR ===== */
+    .generator {
+      max-width: 1100px;
+      margin: 0 auto 100px;
+      padding: 40px 20px;
+    }
+
+    .generator-card {
+      background: linear-gradient(180deg, #141414, #0f0f0f);
+      border: 1px solid var(--border-dark);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    }
+
+    .generator h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .generator h2 span {
+      color: var(--orange);
+    }
+
+    .generator p {
+      color: var(--text-muted);
+      margin-bottom: 30px;
+    }
+
+    .prompt-box {
+      width: 100%;
+      min-height: 120px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 16px;
+      padding: 16px;
+      color: var(--text-light);
+      font-size: 15px;
+      resize: vertical;
+      outline: none;
+      margin-bottom: 20px;
+    }
+
+    .prompt-box::placeholder {
+      color: #777;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .option {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-dark);
+      border-radius: 14px;
+      padding: 14px;
+      color: var(--text-muted);
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 16px;
+      font-size: 18px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #ff7a00, #ffb066);
+      border: none;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 0 30px var(--orange-glow);
+    }
+
+    .generate-btn:hover {
+      box-shadow: 0 0 50px var(--orange-glow);
+    }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 0 20px;
+    }
+
+    .gallery h2 {
+      font-size: 34px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .gallery h2 span {
+      color: var(--orange);
+    }
+
+    .gallery p {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .image-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .image-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 30px rgba(255,122,0,0.2);
+    }
+
+    .image-placeholder {
+      height: 200px;
+      background: linear-gradient(135deg, #1f1f1f, #2a2a2a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: #0a0a0a;
+      border-top: 1px solid var(--border-dark);
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    footer h3 {
+      font-size: 22px;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      margin: 0 12px;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+    }
+
+    .copyright {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 38px;
+      }
+      header {
+        padding: 16px 20px;
+      }
+      nav a {
+        margin-left: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">GORKA AI</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Generate</a>
+      <a href="#">Gallery</a>
+      <a href="#">Pricing</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Create <span>Powerful AI Photos</span><br>with GORKA AI</h1>
+    <p>
+      GORKA AI is a next-generation AI photo generation platform.
+      Turn your imagination into high-quality, cinematic visuals
+      using advanced artificial intelligence.
+    </p>
+    <div class="hero-buttons">
+      <button class="btn btn-primary">Start Generating</button>
+      <button class="btn btn-outline">View Gallery</button>
+    </div>
+  </section>
+
+  <!-- GENERATOR -->
+  <section class="generator">
+    <div class="generator-card">
+      <h2>AI Photo <span>Generator</span></h2>
+      <p>Describe your idea and let GORKA AI create stunning images for you.</p>
+
+      <textarea class="prompt-box" placeholder="Describe your image… (e.g. cinematic portrait, ultra-realistic, dramatic lighting, black & orange theme)"></textarea>
+
+      <div class="options">
+        <div class="option">Style: Cinematic</div>
+        <div class="option">Quality: Ultra HD</div>
+        <div class="option">Aspect: 1:1</div>
+        <div class="option">Lighting: Dramatic</div>
+      </div>
+
+      <button class="generate-btn">Generate Image</button>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery">
+    <h2>Featured <span>Creations</span></h2>
+    <p>Some amazing images generated by the GORKA AI community.</p>
+
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-placeholder">AI Image Preview</div>
+      </div>
+      <div class="image-card">
+        <div class="image-placeholder">AI Image Preview</div>
+      </div>
+      <div class="image-card">
+        <div class="image-placeholder">AI Image Preview</div>
+      </div>
+      <div class="image-card">
+        <div class="image-placeholder">AI Image Preview</div>
+      </div>
+      <div class="image-card">
+        <div class="image-placeholder">AI Image Preview</div>
+      </div>
+      <div class="image-card">
+        <div class="image-placeholder">AI Image Preview</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <h3>GORKA AI</h3>
+    <p>Unleash creativity with next-gen AI photo generation.</p>
+
+    <div class="footer-links">
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+      <a href="#">Support</a>
+      <a href="#">Contact</a>
+    </div>
+
+    <div class="copyright">
+      © 2026 GORKA AI. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+  </html>
